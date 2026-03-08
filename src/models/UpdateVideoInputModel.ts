@@ -1,0 +1,10 @@
+import { Resolutions } from "../types/videoType"
+
+export type UpdateVideoInputModel = {
+    title: string,
+    author: string,
+    availableResolutions: Resolutions[],
+    canBeDownloaded: boolean,
+    minAgeRestriction: any,
+    publicationDate: Date
+}

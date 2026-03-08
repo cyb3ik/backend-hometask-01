@@ -1,6 +1,6 @@
 import request from "supertest";
 import express from "express"
-import { setupApp } from "../setup-app";
+import { setupApp } from "../src/setup-app";
 
 const app = express()
 
