@@ -5,11 +5,11 @@ import { Resolutions } from "../types/videoType";
 export const videoInputCreateValidation = (data: CreateVideoInputModel): FieldError[] => {
     const errors: FieldError[] = []
 
-    if (!data.title || typeof(data.title) !== "string") {
+    if (!data.title || typeof(data.title) !== "string" || data.title.length > 40) {
         errors.push({message: "Invalid title", field: "title"})
     }
 
-    if (!data.author || typeof(data.author) !== "string") {
+    if (!data.author || typeof(data.author) !== "string" || data.author.length > 20) {
         errors.push({message: "Invalid author", field: "author"})
     }
 

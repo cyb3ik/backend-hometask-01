@@ -7,11 +7,11 @@ const dateRegExp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/
 export const videoInputUpdateValidation = (data: UpdateVideoInputModel): FieldError[] => {
     const errors: FieldError[] = [] 
 
-    if (!data.title || typeof(data.title) !== "string") {
+    if (!data.title || typeof(data.title) !== "string" || data.title.length > 40) {
         errors.push({message: "Invalid title", field: "title"})
     }
 
-    if (!data.author || typeof(data.author) !== "string") {
+    if (!data.author || typeof(data.author) !== "string" || data.author.length > 20) {
         errors.push({message: "Invalid author", field: "author"})
     }
 
