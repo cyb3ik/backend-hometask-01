@@ -25,7 +25,7 @@ exports.videoRouter
         res.status(400).send((0, utils_1.createErrorsMessages)(errors));
         return;
     }
-    const newVideo = Object.assign({ id: db_1.db.videos.length ? db_1.db.videos[db_1.db.videos.length - 1].id + 1 : 1, publicationDate: new Date(), createdAt: new Date(), canBeDownloaded: true, minAgeRestriction: null }, req.body);
+    const newVideo = Object.assign({ id: db_1.db.videos.length ? db_1.db.videos[db_1.db.videos.length - 1].id + 1 : 1, publicationDate: new Date(), createdAt: new Date(), canBeDownloaded: false, minAgeRestriction: null }, req.body);
     db_1.db.videos.push(newVideo);
     res.status(201).send(newVideo);
 })

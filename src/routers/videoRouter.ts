@@ -38,7 +38,7 @@ videoRouter
             id: db.videos.length ? db.videos[db.videos.length - 1].id + 1 : 1,
             publicationDate: new Date(),
             createdAt: new Date(),
-            canBeDownloaded: true,
+            canBeDownloaded: false,
             minAgeRestriction: null,
             ...req.body
         }

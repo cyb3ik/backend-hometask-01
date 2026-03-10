@@ -1,8 +1,7 @@
 import { UpdateVideoInputModel } from "../models/UpdateVideoInputModel";
 import { FieldError } from "../types/fieldError";
 import { Resolutions } from "../types/videoType";
-
-const dateRegExp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/
+import { dateRegExp } from "../types/videoType";
 
 export const videoInputUpdateValidation = (data: UpdateVideoInputModel): FieldError[] => {
     const errors: FieldError[] = [] 
