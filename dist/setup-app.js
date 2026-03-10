@@ -14,5 +14,6 @@ const setupApp = (app) => {
     });
     app.use("/hometask_01/api/videos", videoRouter_1.videoRouter);
     app.use("/hometask_01/api/testing", testingRouter_1.testingRouter);
+    return app;
 };
 exports.setupApp = setupApp;

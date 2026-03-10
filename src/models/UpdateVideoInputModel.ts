@@ -5,6 +5,6 @@ export type UpdateVideoInputModel = {
     author: string,
     availableResolutions: Resolutions[],
     canBeDownloaded: boolean,
-    minAgeRestriction: any,
+    minAgeRestriction: number | null,
     publicationDate: Date
 }

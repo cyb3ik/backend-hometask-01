@@ -3,7 +3,7 @@ export type Video = {
     title: string
     author: string
     canBeDownloaded: boolean
-    minAgeRestriction: any // исправить
+    minAgeRestriction: number | null
     createdAt: Date
     publicationDate: Date
     availableResolutions: Resolutions[]

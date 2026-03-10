@@ -6,10 +6,9 @@ const app = express()
 
 setupApp(app)
  
-describe("GET /", () => {
-  it("should return 'Hello World!'", async () => {
-    const res = await request(app).get("/");
-    expect(res.status).toBe(200);
-    expect(res.text).toBe("Hello World!");
-  });
+describe("Video API /", () => {
+
+  it("should read all videos", async () => {
+    
+  })
 });

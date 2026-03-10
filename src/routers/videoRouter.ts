@@ -5,6 +5,7 @@ import { CreateVideoInputModel } from "../models/CreateVideoInputModel"
 import { UpdateVideoInputModel } from "../models/UpdateVideoInputModel"
 import { videoInputCreateValidation } from "../validation/videoInputCreateValidation"
 import { createErrorsMessages } from "../utils"
+import { videoInputUpdateValidation } from "../validation/videoInpuUpdatetValidation"
 
 export const videoRouter = Router()
 
@@ -30,6 +31,7 @@ videoRouter
 
         if (errors.length > 0) {
             res.status(400).send(createErrorsMessages(errors))
+            return
         }
 
         const newVideo: Video = {
@@ -38,7 +40,6 @@ videoRouter
             createdAt: new Date(),
             canBeDownloaded: true,
             minAgeRestriction: null,
-
             ...req.body
         }
 
@@ -48,28 +49,43 @@ videoRouter
     })
 
     .put("/:id", (req: Request<{id: string}, {}, UpdateVideoInputModel>, res: Response) => {
-        let foundVideo = db.videos.find(v => v.id === +req.params.id)
 
-        if (!foundVideo) {
-            res.status(404).send("ApiErrorResult")
+        const errors = videoInputUpdateValidation(req.body)
+
+        if (errors.length > 0) {
+            res.status(400).send(createErrorsMessages(errors))
+            return
         }
-        else {
-            
+
+        let foundVideoIndex = db.videos.findIndex(v => v.id === Number(req.params.id))
+
+        if (foundVideoIndex === -1) {
+            res.sendStatus(404)
+            return
         }
+        
+        const foundVideo = db.videos[foundVideoIndex]
+
+        foundVideo.title = req.body.title
+        foundVideo.author = req.body.author
+        foundVideo.availableResolutions = req.body.availableResolutions
+        foundVideo.canBeDownloaded = req.body.canBeDownloaded
+        foundVideo.minAgeRestriction = req.body.minAgeRestriction
+        foundVideo.publicationDate = req.body.publicationDate
+
         res.sendStatus(204)
     })
 
     .delete("/:id", (req: Request, res: Response) => {
+        const foundVideoIndex = db.videos.findIndex(a => a.id == Number(req.params.id))
 
-        const foundVideo = db.videos.find(a => a.id == +req.params.id)
-
-        if (!foundVideo) {
-            res.status(404).send("ApiErrorResult")
+        if (foundVideoIndex === -1) {
+            res.sendStatus(404)
         }
 
         else {
-            db.videos.filter(v => v.id === +req.params.id)
+            db.videos.splice(foundVideoIndex, 1)
+            res.sendStatus(204)
         }
 
-        res.sendStatus(204)
     })

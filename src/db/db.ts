@@ -1,6 +1,6 @@
-import { Resolutions } from "../types/videoType"
+import { Resolutions, Video } from "../types/videoType"
 
-export const db = {
+export const db: { videos: Video[] } = {
   videos: [
   {
     id: 0,
@@ -12,5 +12,5 @@ export const db = {
     publicationDate: new Date(),
     availableResolutions: [Resolutions.P144]
   }
-]
+  ]
 }
