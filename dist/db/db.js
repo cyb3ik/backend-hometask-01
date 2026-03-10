@@ -10,8 +10,8 @@ exports.db = {
             author: "John",
             canBeDownloaded: true,
             minAgeRestriction: 16,
-            createdAt: new Date(),
-            publicationDate: new Date(),
+            createdAt: new Date().toISOString(),
+            publicationDate: new Date().toISOString(),
             availableResolutions: [videoType_1.Resolutions.P144]
         }
     ]

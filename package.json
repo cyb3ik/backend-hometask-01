@@ -7,12 +7,12 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-  "watch": "tsc -w",
-  "dev": "nodemon --inspect dist/index.js",
-  "jest": "jest -i",
-  "lint": "eslint --fix .",
-  "format": "prettier --write ."
-},
+    "watch": "tsc -w",
+    "dev": "nodemon --inspect dist/index.js",
+    "jest": "jest -i",
+    "lint": "eslint --fix .",
+    "format": "prettier --write ."
+  },
   "dependencies": {
     "express": "^5.2.1"
   },
