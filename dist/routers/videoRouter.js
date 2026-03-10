@@ -26,7 +26,9 @@ exports.videoRouter
         res.status(statusCodes_1.HTTPStatusCode.BAD_REQUEST).send((0, utils_1.createErrorsMessages)(errors));
         return;
     }
-    const newVideo = Object.assign({ id: db_1.db.videos.length ? db_1.db.videos[db_1.db.videos.length - 1].id + 1 : 1, publicationDate: new Date().toISOString(), createdAt: new Date().toISOString(), canBeDownloaded: false, minAgeRestriction: null }, req.body);
+    const publicationDate = new Date();
+    publicationDate.setDate(publicationDate.getDate() + 1);
+    const newVideo = Object.assign({ id: db_1.db.videos.length ? db_1.db.videos[db_1.db.videos.length - 1].id + 1 : 1, publicationDate: publicationDate.toISOString(), createdAt: new Date().toISOString(), canBeDownloaded: false, minAgeRestriction: null }, req.body);
     db_1.db.videos.push(newVideo);
     res.status(statusCodes_1.HTTPStatusCode.CREATED).send(newVideo);
 })

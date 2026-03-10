@@ -35,9 +35,13 @@ videoRouter
             return
         }
 
+        const publicationDate = new Date()
+
+        publicationDate.setDate(publicationDate.getDate() + 1)
+
         const newVideo: Video = {
             id: db.videos.length ? db.videos[db.videos.length - 1].id + 1 : 1,
-            publicationDate: new Date().toISOString(),
+            publicationDate: publicationDate.toISOString(),
             createdAt: new Date().toISOString(),
             canBeDownloaded: false,
             minAgeRestriction: null,
