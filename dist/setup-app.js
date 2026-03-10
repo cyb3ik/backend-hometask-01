@@ -7,10 +7,11 @@ exports.setupApp = void 0;
 const express_1 = __importDefault(require("express"));
 const videoRouter_1 = require("./routers/videoRouter");
 const testingRouter_1 = require("./routers/testingRouter");
+const statusCodes_1 = require("./types/statusCodes");
 const setupApp = (app) => {
     app.use(express_1.default.json());
     app.get("/", (req, res) => {
-        res.status(200).send("Hello World!");
+        res.status(statusCodes_1.HTTPStatusCode.OK).send("Hello World!");
     });
     app.use("/hometask_01/api/videos", videoRouter_1.videoRouter);
     app.use("/hometask_01/api/testing", testingRouter_1.testingRouter);

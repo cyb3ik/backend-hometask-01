@@ -6,23 +6,24 @@ import { UpdateVideoInputModel } from "../models/UpdateVideoInputModel"
 import { videoInputCreateValidation } from "../validation/videoInputCreateValidation"
 import { createErrorsMessages } from "../utils"
 import { videoInputUpdateValidation } from "../validation/videoInpuUpdatetValidation"
+import { HTTPStatusCode } from "../types/statusCodes"
 
 export const videoRouter = Router()
 
 videoRouter
     .get("/", (req: Request, res: Response) => {
-        res.status(200).send(db.videos)
+        res.status(HTTPStatusCode.OK).send(db.videos)
     })
 
     .get("/:id", (req: Request<{id: string}>, res: Response<Video | null>) => {
         const foundVideo = db.videos.find(a => a.id === Number(req.params.id))
 
         if (!foundVideo) {
-            res.sendStatus(404)
+            res.sendStatus(HTTPStatusCode.NOT_FOUND)
             return
         }
 
-        res.status(200).send(foundVideo)
+        res.status(HTTPStatusCode.OK).send(foundVideo)
     })
 
     .post("/", (req: Request<{}, {}, CreateVideoInputModel>, res: Response) => {
@@ -30,7 +31,7 @@ videoRouter
         const errors = videoInputCreateValidation(req.body)
 
         if (errors.length > 0) {
-            res.status(400).send(createErrorsMessages(errors))
+            res.status(HTTPStatusCode.NOT_FOUND).send(createErrorsMessages(errors))
             return
         }
 
@@ -45,7 +46,7 @@ videoRouter
 
         db.videos.push(newVideo)
 
-        res.status(201).send(newVideo)
+        res.status(HTTPStatusCode.CREATED).send(newVideo)
     })
 
     .put("/:id", (req: Request<{id: string}, {}, UpdateVideoInputModel>, res: Response) => {
@@ -53,14 +54,14 @@ videoRouter
         const errors = videoInputUpdateValidation(req.body)
 
         if (errors.length > 0) {
-            res.status(400).send(createErrorsMessages(errors))
+            res.status(HTTPStatusCode.BAD_REQUEST).send(createErrorsMessages(errors))
             return
         }
 
         let foundVideoIndex = db.videos.findIndex(v => v.id === Number(req.params.id))
 
         if (foundVideoIndex === -1) {
-            res.sendStatus(404)
+            res.sendStatus(HTTPStatusCode.NOT_FOUND)
             return
         }
         
@@ -73,19 +74,19 @@ videoRouter
         foundVideo.minAgeRestriction = req.body.minAgeRestriction
         foundVideo.publicationDate = req.body.publicationDate
 
-        res.sendStatus(204)
+        res.sendStatus(HTTPStatusCode.NO_CONTENT)
     })
 
     .delete("/:id", (req: Request, res: Response) => {
         const foundVideoIndex = db.videos.findIndex(a => a.id == Number(req.params.id))
 
         if (foundVideoIndex === -1) {
-            res.sendStatus(404)
+            res.sendStatus(HTTPStatusCode.NOT_FOUND)
         }
 
         else {
             db.videos.splice(foundVideoIndex, 1)
-            res.sendStatus(204)
+            res.sendStatus(HTTPStatusCode.NO_CONTENT)
         }
 
     })
