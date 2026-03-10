@@ -27,8 +27,8 @@ export const videoInputCreateValidation = (data: CreateVideoInputModel): FieldEr
         for (const resolution of data.availableResolutions) {
             if (!existingResolutins.includes(resolution)) {
                 errors.push({message: "Unknown resolution in availableResolutions:" + resolution, field: "availableResolutions"})
+                break
             }
-            break
         }
     }
 
