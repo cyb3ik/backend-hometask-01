@@ -23,7 +23,7 @@ exports.videoRouter
     .post("/", (req, res) => {
     const errors = (0, videoInputCreateValidation_1.videoInputCreateValidation)(req.body);
     if (errors.length > 0) {
-        res.status(statusCodes_1.HTTPStatusCode.NOT_FOUND).send((0, utils_1.createErrorsMessages)(errors));
+        res.status(statusCodes_1.HTTPStatusCode.BAD_REQUEST).send((0, utils_1.createErrorsMessages)(errors));
         return;
     }
     const newVideo = Object.assign({ id: db_1.db.videos.length ? db_1.db.videos[db_1.db.videos.length - 1].id + 1 : 1, publicationDate: new Date(), createdAt: new Date(), canBeDownloaded: false, minAgeRestriction: null }, req.body);

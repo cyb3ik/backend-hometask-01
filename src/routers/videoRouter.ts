@@ -31,7 +31,7 @@ videoRouter
         const errors = videoInputCreateValidation(req.body)
 
         if (errors.length > 0) {
-            res.status(HTTPStatusCode.NOT_FOUND).send(createErrorsMessages(errors))
+            res.status(HTTPStatusCode.BAD_REQUEST).send(createErrorsMessages(errors))
             return
         }
 
